@@ -1,14 +1,15 @@
+use std::fmt;
 use std::fmt::Display;
 use std::ops::{Add, Div, Mul, Sub};
 
 /// `a` + `b` * `j`, where `j` is sqrt(-1)
 #[derive(Clone, Copy, Debug)]
-struct CompNum {
-    a: f64,
-    b: f64,
+pub struct CompNum {
+    pub a: f64,
+    pub b: f64,
 }
 impl CompNum {
-    fn from(a: f64, b: f64) -> Self {
+    pub fn from(a: f64, b: f64) -> Self {
         Self { a, b }
     }
 }
@@ -40,7 +41,7 @@ impl Add<f64> for CompNum {
 impl Sub<Self> for CompNum {
     type Output = Self;
 
-    fn sub(self, other: f64) -> Self {
+    fn sub(self, other: Self) -> Self {
         let a = self.a - other.a;
         let b = self.b - other.b;
 
@@ -50,7 +51,7 @@ impl Sub<Self> for CompNum {
 impl Sub<f64> for CompNum {
     type Output = Self;
 
-    fn sub(self, other: Self) -> Self {
+    fn sub(self, other: f64) -> Self {
         let a = self.a - other;
         let b = self.b;
 
@@ -71,6 +72,15 @@ impl Mul<Self> for CompNum {
         return result;
     }
 }
+impl Mul<f64> for CompNum {
+    type Output = Self;
+
+    fn mul(self, other: f64) -> Self {
+        let (a, b) = (self.a * other, self.b * other);
+
+        Self { a, b }
+    }
+}
 impl Div<Self> for CompNum {
     type Output = Self;
 
@@ -85,11 +95,19 @@ impl Div<Self> for CompNum {
         return result;
     }
 }
+impl Div<f64> for CompNum {
+    type Output = Self;
+
+    fn div(self, other: f64) -> Self {
+        let (a, b) = (self.a / other, self.b / other);
+
+        Self { a, b }
+    }
+}
 
 fn main() {
     let num1 = CompNum::from(1.0, 2.0); // 1 + 2j
     let num2 = CompNum::from(2.0, 3.0); // 3 + 4j
 
-    println!("{}", num1.clone() / num2.clone());
-    println!("{}", num1.clone() + 1.0);
+    println!("{} / {} = {}", num1.clone(), 2.0, num1.clone() / 2.0);
 }
