@@ -40,9 +40,19 @@ impl Add<f64> for CompNum {
 impl Sub<Self> for CompNum {
     type Output = Self;
 
-    fn sub(self, other: Self) -> Self {
+    fn sub(self, other: f64) -> Self {
         let a = self.a - other.a;
         let b = self.b - other.b;
+
+        Self { a, b }
+    }
+}
+impl Sub<f64> for CompNum {
+    type Output = Self;
+
+    fn sub(self, other: Self) -> Self {
+        let a = self.a - other;
+        let b = self.b;
 
         Self { a, b }
     }
