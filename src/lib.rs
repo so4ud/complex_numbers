@@ -105,9 +105,9 @@ impl Div<f64> for CompNum {
     }
 }
 
-fn main() {
-    let num1 = CompNum::from(1.0, 2.0); // 1 + 2j
-    let num2 = CompNum::from(2.0, 3.0); // 3 + 4j
-
-    println!("{} / {} = {}", num1.clone(), 2.0, num1.clone() / 2.0);
-}
+// fn main() {
+//     let num1 = CompNum::from(1.0, 2.0); // 1 + 2j
+//     let num2 = CompNum::from(2.0, 3.0); // 3 + 4j
+//
+//     println!("{} / {} = {}", num1.clone(), 2.0, num1.clone() / 2.0);
+// }
