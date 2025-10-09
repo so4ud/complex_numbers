@@ -12,6 +12,9 @@ impl CompNum {
     pub fn from(a: f64, b: f64) -> Self {
         Self { a, b }
     }
+    pub fn colapse(&self) -> Option<f64> {
+        if self.b == 0.0 { Some(self.a) } else { None }
+    }
 }
 impl Display for CompNum {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
